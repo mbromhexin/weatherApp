@@ -1,0 +1,26 @@
+#weather{
+    background-image: url('../imgs/weather02.jpeg');
+    background-position: center center;
+    background-size: cover;
+    height: 90vh;
+}
+
+.location{
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+
+.temp{
+    font-size: 48px;
+}
+
+.day{
+    padding: 10px;
+}
+
+
+
+
+
+

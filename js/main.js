@@ -2,18 +2,50 @@ var myDate = new Date();
 var dayIndex = myDate.getDay();
 var monthIndex = myDate.getMonth();
 var dayNumber = myDate.getDate();
+var cityName = document.getElementById('cityName')
+
+
+
+let city = "cairo";
+
+
+
+cityName.addEventListener('keyup',async function(){
+
+  city = cityName.value
+
+  myApi(city);
+
+  // var myRespons =
+  // await fetch(`http://api.weatherapi.com/v1/forecast.json?key=fdcb7a70e391443786613610230108&q=${city}&days=3&aqi=yes&alerts=no
+  // `);
+  // var myResponsData = await myRespons.json();
+  // console.log(myResponsData.location.name);
+  
+
+})
 
 // document.write(`<p>${dayNumber}${getMonthString(monthIndex)}</p>`);
 // document.write(`<h1>${getDayString(dayIndex)}</h1>`);
 // document.write(`<h1>${getHoure()}</h1>`);
 
-let city = "london";
 
 
-myApi();
-async function myApi() {
+
+
+
+
+
+
+
+
+myApi(city);
+
+
+
+async function myApi(location) {
   var myRespons =
-    await fetch(`http://api.weatherapi.com/v1/forecast.json?key=fdcb7a70e391443786613610230108&q=${city}&days=3&aqi=yes&alerts=no
+    await fetch(`http://api.weatherapi.com/v1/forecast.json?key=fdcb7a70e391443786613610230108&q=${location}&days=3&aqi=yes&alerts=no
     `);
   var myResponsData = await myRespons.json();
 //   console.log(myResponsData);
@@ -28,13 +60,13 @@ async function myApi() {
   console.log(myResponsData.forecast.forecastday[0].hour[getHoure()].condition.text);
   console.log(myResponsData.forecast.forecastday[0].hour[getHoure()].air_quality.no2);
   console.log("============ next day ==============");
-  console.log(getDayString(dayIndex + 1));
+  console.log(getDayString(dayIndex+1));
   console.log(myResponsData.forecast.forecastday[1].day.condition.icon);
   console.log(myResponsData.forecast.forecastday[1].day.maxtemp_c);
   console.log(myResponsData.forecast.forecastday[1].day.mintemp_c);
   console.log(myResponsData.forecast.forecastday[1].day.condition.text);
   console.log("============ later day =============");
-  console.log(getDayString(dayIndex + 2));
+  console.log(getDayString(dayIndex+2));
   console.log(myResponsData.forecast.forecastday[2].day.condition.icon);
   console.log(myResponsData.forecast.forecastday[2].day.maxtemp_c);
   console.log(myResponsData.forecast.forecastday[2].day.mintemp_c);
@@ -105,7 +137,19 @@ function getDayString(index) {
     "Friday",
     "Saturday",
   ];
-  return weekday[index];
+  if(index <= 6)
+  {
+    return weekday[index];
+  }
+  else if( index == 7)
+  {
+    return weekday[0];
+  }
+  else if (index == 8)
+  {
+    return weekday[1];
+  }
+
 }
 
 function getHoure() {
